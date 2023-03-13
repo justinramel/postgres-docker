@@ -1,25 +1,22 @@
--- CreateTable
-CREATE TABLE "Top3"
+CREATE TABLE top3
 (
-    "id"        SERIAL NOT NULL,
-    "createdAt" DATE   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    id        SERIAL NOT NULL,
+    created_at DATE   NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "Top3_pkey" PRIMARY KEY ("id")
+    CONSTRAINT top3_pkey PRIMARY KEY (id)
 );
 
--- CreateTable
-CREATE TABLE "Todo"
+CREATE TABLE todo
 (
-    "id"       SERIAL  NOT NULL,
-    "title"    TEXT    NOT NULL,
-    "complete" BOOLEAN NOT NULL DEFAULT false,
-    "top3Id"   INTEGER NOT NULL,
+    id       SERIAL  NOT NULL,
+    title    TEXT    NOT NULL,
+    complete BOOLEAN NOT NULL DEFAULT false,
+    top3_id   INTEGER NOT NULL,
 
-    CONSTRAINT "Todo_pkey" PRIMARY KEY ("id")
+    CONSTRAINT todo_pkey PRIMARY KEY (id)
 );
 
--- AddForeignKey
-ALTER TABLE "Todo"
-    ADD CONSTRAINT "Todo_top3Id_fkey"
-        FOREIGN KEY ("top3Id") REFERENCES "Top3" ("id")
+ALTER TABLE todo
+    ADD CONSTRAINT todo_top3_id_fkey
+        FOREIGN KEY (top3_id) REFERENCES top3 (id)
             ON DELETE CASCADE ON UPDATE CASCADE;
